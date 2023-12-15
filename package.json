@@ -5,10 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && pnpm run postbuild",
     "postbuild": "shx cp ./src/demo.html ./dist/demo.html",
     "start": "node dist/server.js",
-    "clean": "shx rm -rf ./dist"
+    "clean": "shx rm -rf ./dist",
+    "dev": "pnpm run clean && pnpm run build && pnpm run start"
   },
   "keywords": [],
   "author": "",
