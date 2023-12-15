@@ -8,6 +8,8 @@ import {createClient} from "redis";
 import {SubscribePayload, SubscribePayloadSchema} from "./validation.js";
 import {ErrorBadPayload} from "./errors.js";
 import {getAddress} from "ethers";
+import {handler} from "./handler/index.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +24,9 @@ const subClient = pubClient.duplicate();
 app.get('/', (req, res) => {
     res.send("Nothing to see here. Move along.")
 });
+
+app.post("/account/create", handler.account.create)
+app.post("/account", handler.account.get)
 
 app.post("/webhook", (req, res) => {
     const activities = req.body.event.activities;
